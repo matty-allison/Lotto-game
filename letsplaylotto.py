@@ -1,5 +1,4 @@
 from tkinter import *
-from tkinter import messagebox
 
 frame = Tk()
 frame.title("Lotto")
@@ -34,25 +33,36 @@ class PlayerLotto:
         self.label1 = Label(master, text="Select 6 numbers to make a set. (You can have 3 sets)")
         self.label1.place(x=100, y=250)
         self.label1.config(bg="yellow", font="200")
-        self.set1 = Label(master, text="10 20 30 40 50 60")
-        self.set1.place(x=150, y=350)
+        self.set1 = Label(master)
+        self.set1.place(x=50, y=350)
         self.set1.config(bg="orange", font="600")
         self.set2 = Label(master)
-        self.set2.place(x=150, y=400)
+        self.set2.place(x=50, y=400)
         self.set2.config(bg="orange", font="600")
         self.set3 = Label(master)
-        self.set3.place(x=150, y=450)
+        self.set3.place(x=50, y=450)
         self.set3.config(bg="orange", font="600")
         self.finished_set = Button(master, text="Finished set")
         self.finished_set.place(x=250, y=290)
         self.finished_set.config(bg="orange", borderwidth="5")
-        self.start_lotto = Button(master, text="START LOTTO!!", command=self.runlotto)
+        self.start_lotto = Button(master, text="START LOTTO!!")
         self.start_lotto.place(x=240, y=500)
         self.start_lotto.config(bg="red", borderwidth="10")
-
-    def runlotto(self):
-        frame.destroy()
-        import winnings
+        self.amount = Label(master, text="10, 000, 000.00")
+        self.amount.place(x=350, y=400)
+        self.amount.config(bg="yellow", font=("bold", 15))
+        self.currency = Button(master, text="Convert?")
+        self.currency.place(x=350, y=450)
+        self.currency.config(bg="orange", borderwidth="5")
+        self.playagain = Button(master, text="Play again?!")
+        self.playagain.place(x=100, y=500)
+        self.playagain.config(bg="orange", borderwidth="5")
+        self.claimprize = Button(master, text="Claim prize!!")
+        self.claimprize.place(x=400, y=500)
+        self.claimprize.config(bg="red", borderwidth="5")
+        self.winningset = Label(master, text="10 20 30 40 50 60")
+        self.winningset.place(x=350, y=350)
+        self.winningset.config(bg='yellow', font=("bold", 15), fg="red")
 
 
 x = PlayerLotto(frame)

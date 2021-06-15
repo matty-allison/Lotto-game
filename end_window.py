@@ -1,5 +1,4 @@
 from tkinter import *
-from tkinter import messagebox
 
 holder = Tk()
 holder.title("Claim your prize!")
@@ -24,6 +23,9 @@ class ClaimThePrize:
         self.bank = OptionMenu(master, variable, *OptionList)
         self.bank.place(x=250, y=200)
         self.bank.config(bg="orange", borderwidth="5")
+        self.submit = Button(master, text="Submit")
+        self.submit.place(x=230, y=280)
+        self.submit.config(bg="red", borderwidth="5", font=("bold", 15))
 
 x = ClaimThePrize(holder)
 holder.mainloop()
