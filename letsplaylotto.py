@@ -19,23 +19,24 @@ class PlayerLotto:
     list1 = StringVar()
     list2 = StringVar()
     list3 = StringVar()
+    list4 = IntVar()
     def __init__(self,master):
-        self.spinbox1 = Spinbox(master, width=5, from_=0, to=49)
+        self.spinbox1 = Spinbox(master, width=5, from_=1, to=49)
         self.spinbox1.place(x=70, y=200)
         self.spinbox1.config(bg="orange", borderwidth="5")
-        self.spinbox2 = Spinbox(master, width=5, from_=0, to=49)
+        self.spinbox2 = Spinbox(master, width=5, from_=1, to=49)
         self.spinbox2.place(x=150, y=200)
         self.spinbox2.config(bg="orange", borderwidth="5")
-        self.spinbox3 = Spinbox(master, width=5, from_=0, to=49)
+        self.spinbox3 = Spinbox(master, width=5, from_=1, to=49)
         self.spinbox3.place(x=230, y=200)
         self.spinbox3.config(bg="orange", borderwidth="5")
-        self.spinbox4 = Spinbox(master, width=5, from_=0, to=49)
+        self.spinbox4 = Spinbox(master, width=5, from_=1, to=49)
         self.spinbox4.place(x=310, y=200)
         self.spinbox4.config(bg="orange", borderwidth="5")
-        self.spinbox5 = Spinbox(master, width=5, from_=0, to=49)
+        self.spinbox5 = Spinbox(master, width=5, from_=1, to=49)
         self.spinbox5.place(x=390, y=200)
         self.spinbox5.config(bg="orange", borderwidth="5")
-        self.spinbox6 = Spinbox(master, width=5, from_=0, to=49)
+        self.spinbox6 = Spinbox(master, width=5, from_=1, to=49)
         self.spinbox6.place(x=470, y=200)
         self.spinbox6.config(bg="orange", borderwidth="5")
         self.label1 = Label(master, text="Select 6 numbers to make a set. (the limit is 49)")
@@ -65,8 +66,9 @@ class PlayerLotto:
         self.start_lotto = Button(master, text="START LOTTO!!", command=self.winnings)
         self.start_lotto.place(x=220, y=500)
         self.start_lotto.config(bg="red", borderwidth="10")
-        self.amount = Label(master)
+        self.amount = Label(master, textvariable=self.list4)
         self.amount.place(x=350, y=400)
+        self.numberlist4 = []
         self.amount.config(bg="yellow", font=("bold", 15))
         self.currency = Button(master, text="Convert?")
         self.currency.place(x=350, y=450)
@@ -82,12 +84,24 @@ class PlayerLotto:
         self.winningset.config(bg='yellow', font=("bold", 15), fg="red")
 
     def winnings(self):
+        y = 0
         winning_set = random.sample(range(1, 49), 6)
         self.winningset.config(text=winning_set)
-        if self.list1.get() == self.winningset:
-            self.amount.config(text="YOU WIN")
-        else:
-            self.amount.config(text="YOU LOSE")
+        for i in range(0, 6):
+            if self.list1 in winning_set:
+                y += 1
+            if y == 6:
+                self.list4 = 100000
+            elif y == 5:
+                self.list4 = 8584
+            elif y == 4:
+                self.list4 = 2384
+            elif y == 3:
+                self.list4 = 100.00
+            elif y == 2:
+                self.list4 = 20
+            elif y < 2:
+                self.list4 = 0
 
     def set_1(self):
         the_set = self.spinbox1.get() + self.spinbox2.get() + self.spinbox3.get() + self.spinbox4.get() + self.spinbox5.get() + self.spinbox6.get()

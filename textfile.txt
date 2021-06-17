@@ -18,3 +18,8 @@ Email: uthmaanbreda@gmail.com
 Id Number: 9609095470083
 Player ID: uthmaan96
 Age:24
+Username: Thabo
+Email: thabosetsubi3@gmail.com
+Id Number: 9903156253086
+Player ID: Thabo99
+Age:22
