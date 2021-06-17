@@ -1,4 +1,6 @@
 from tkinter import *
+from tkinter import messagebox
+import random
 
 frame = Tk()
 frame.title("Lotto")
@@ -10,7 +12,12 @@ class PlayerLotto:
     canvas.place(x=140, y=10)
     img = PhotoImage(file="images.png")
     canvas.create_image(150, 79, image=img)
-
+    numberlist1 = StringVar()
+    numberlist2 = StringVar()
+    numberlist3 = StringVar()
+    list1 = StringVar()
+    list2 = StringVar()
+    list3 = StringVar()
     def __init__(self,master):
         self.spinbox1 = Spinbox(master, width=5, from_=0, to=49)
         self.spinbox1.place(x=70, y=200)
@@ -31,39 +38,168 @@ class PlayerLotto:
         self.spinbox6.place(x=470, y=200)
         self.spinbox6.config(bg="orange", borderwidth="5")
         self.label1 = Label(master, text="Select 6 numbers to make a set. (You can have 3 sets)")
-        self.label1.place(x=100, y=250)
+        self.label1.place(x=80, y=250)
         self.label1.config(bg="yellow", font="200")
-        self.set1 = Label(master)
+        self.set1 = Label(master, textvariable=self.list1)
         self.set1.place(x=50, y=350)
-        self.set1.config(bg="orange", font="600")
-        self.set2 = Label(master)
+        self.numberlist1 = []
+        self.set1.config(bg="yellow", font="600")
+        self.set2 = Label(master, textvariable=self.list2)
         self.set2.place(x=50, y=400)
-        self.set2.config(bg="orange", font="600")
-        self.set3 = Label(master)
+        self.numberlist2 = []
+        self.set2.config(bg="yellow", font="600")
+        self.set3 = Label(master, textvariable=self.list3)
         self.set3.place(x=50, y=450)
-        self.set3.config(bg="orange", font="600")
-        self.finished_set = Button(master, text="Finished set")
-        self.finished_set.place(x=250, y=290)
-        self.finished_set.config(bg="orange", borderwidth="5")
+        self.numberlist3 = []
+        self.set3.config(bg="yellow", font="600")
+        self.finished_set1 = Button(master, text="Set 1", command=self.set_1)
+        self.finished_set1.place(x=150, y=290)
+        self.finished_set1.config(bg="orange", borderwidth="5")
+        self.finished_set2 = Button(master, text="Set 2", command=self.set_2)
+        self.finished_set2.place(x=250, y=290)
+        self.finished_set2.config(bg="orange", borderwidth="5")
+        self.finished_set3 = Button(master, text="Set 3", command=self.set_3)
+        self.finished_set3.place(x=350, y=290)
+        self.finished_set3.config(bg="orange", borderwidth="5")
         self.start_lotto = Button(master, text="START LOTTO!!")
-        self.start_lotto.place(x=240, y=500)
+        self.start_lotto.place(x=220, y=500)
         self.start_lotto.config(bg="red", borderwidth="10")
-        self.amount = Label(master, text="10, 000, 000.00")
+        self.amount = Label(master, text="R10, 000, 000.00")
         self.amount.place(x=350, y=400)
         self.amount.config(bg="yellow", font=("bold", 15))
         self.currency = Button(master, text="Convert?")
         self.currency.place(x=350, y=450)
         self.currency.config(bg="orange", borderwidth="5")
-        self.playagain = Button(master, text="Play again?!")
-        self.playagain.place(x=100, y=500)
+        self.playagain = Button(master, text="Play again?!", command=self.clr)
+        self.playagain.place(x=80, y=500)
         self.playagain.config(bg="orange", borderwidth="5")
         self.claimprize = Button(master, text="Claim prize!!")
-        self.claimprize.place(x=400, y=500)
+        self.claimprize.place(x=385, y=500)
         self.claimprize.config(bg="red", borderwidth="5")
         self.winningset = Label(master, text="10 20 30 40 50 60")
         self.winningset.place(x=350, y=350)
         self.winningset.config(bg='yellow', font=("bold", 15), fg="red")
 
+    def set_1(self):
+        the_set = self.spinbox1.get() + self.spinbox2.get() + self.spinbox3.get() + self.spinbox4.get() + self.spinbox5.get() + self.spinbox6.get()
+        try:
+            """
+            self.numberlist1.append(int(self.spinbox1.get()))
+            self.numberlist1.append(int(self.spinbox2.get()))
+            self.numberlist1.append(int(self.spinbox3.get()))
+            self.numberlist1.append(int(self.spinbox4.get()))
+            self.numberlist1.append(int(self.spinbox5.get()))
+            self.numberlist1.append(int(self.spinbox6.get()))
+            """
+            if int(self.spinbox1.get()) <= 49:
+                self.numberlist1.append(int(self.spinbox1.get()))
+            elif int(self.spinbox1.get()) > 49:
+                messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+            if int(self.spinbox2.get()) <= 49:
+                self.numberlist1.append(int(self.spinbox2.get()))
+            elif int(self.spinbox2.get()) > 49:
+                messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+            if int(self.spinbox3.get()) <= 49:
+                self.numberlist1.append(int(self.spinbox3.get()))
+            elif int(self.spinbox3.get()) > 49:
+                messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+            if int(self.spinbox4.get()) <= 49:
+                self.numberlist1.append(int(self.spinbox4.get()))
+            elif int(self.spinbox4.get()) > 49:
+                messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+            if int(self.spinbox5.get()) <= 49:
+                self.numberlist1.append(int(self.spinbox5.get()))
+            elif int(self.spinbox5.get()) > 49:
+                messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+            if int(self.spinbox6.get()) <= 49:
+                self.numberlist1.append(int(self.spinbox6.get()))
+            elif int(self.spinbox6.get()) > 49:
+                messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+            self.list1.set(self.numberlist1)
+        except ValueError:
+            if the_set != int:
+                messagebox.showerror('STATUS', "Invalid")
+        self.finished_set1.config(state="disabled")
+
+    def set_2(self):
+        the_set = self.spinbox1.get() + self.spinbox2.get() + self.spinbox3.get() + self.spinbox4.get() + self.spinbox5.get() + self.spinbox6.get()
+        try:
+            if int(self.spinbox1.get()) <= 49:
+                self.numberlist2.append(int(self.spinbox1.get()))
+            elif int(self.spinbox1.get()) > 49:
+                messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+            if int(self.spinbox2.get()) <= 49:
+                self.numberlist2.append(int(self.spinbox2.get()))
+            elif int(self.spinbox2.get()) > 49:
+                messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+            if int(self.spinbox3.get()) <= 49:
+                self.numberlist2.append(int(self.spinbox3.get()))
+            elif int(self.spinbox3.get()) > 49:
+                messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+            if int(self.spinbox4.get()) <= 49:
+                self.numberlist2.append(int(self.spinbox4.get()))
+            elif int(self.spinbox4.get()) > 49:
+                messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+            if int(self.spinbox5.get()) <= 49:
+                self.numberlist2.append(int(self.spinbox5.get()))
+            elif int(self.spinbox5.get()) > 49:
+                messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+            if int(self.spinbox6.get()) <= 49:
+                self.numberlist2.append(int(self.spinbox6.get()))
+            elif int(self.spinbox6.get()) > 49:
+                messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+            self.list2.set(self.numberlist2)
+        except ValueError:
+            if the_set != int:
+                messagebox.showerror('STATUS', "Invalid")
+        self.finished_set2.config(state="disabled")
+
+    def set_3(self):
+        the_set = self.spinbox1.get() + self.spinbox2.get() + self.spinbox3.get() + self.spinbox4.get() + self.spinbox5.get() + self.spinbox6.get()
+        try:
+            if int(self.spinbox1.get()) <= 49:
+                self.numberlist3.append(int(self.spinbox1.get()))
+            elif int(self.spinbox1.get()) > 49:
+                messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+            if int(self.spinbox2.get()) <= 49:
+                self.numberlist3.append(int(self.spinbox2.get()))
+            elif int(self.spinbox2.get()) > 49:
+                messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+            if int(self.spinbox3.get()) <= 49:
+                self.numberlist3.append(int(self.spinbox3.get()))
+            elif int(self.spinbox3.get()) > 49:
+                messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+            if int(self.spinbox4.get()) <= 49:
+                self.numberlist3.append(int(self.spinbox4.get()))
+            elif int(self.spinbox4.get()) > 49:
+                messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+            if int(self.spinbox5.get()) <= 49:
+                self.numberlist3.append(int(self.spinbox5.get()))
+            elif int(self.spinbox5.get()) > 49:
+                messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+            if int(self.spinbox6.get()) <= 49:
+                self.numberlist3.append(int(self.spinbox6.get()))
+            elif int(self.spinbox6.get()) > 49:
+                messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+            self.list3.set(self.numberlist3)
+        except ValueError:
+            if the_set != int:
+                messagebox.showerror('STATUS', "Invalid")
+        self.finished_set3.config(state="disabled")
+
+    def clr(self):
+        self.spinbox1.delete(0, END)
+        self.spinbox2.delete(0, END)
+        self.spinbox3.delete(0, END)
+        self.spinbox4.delete(0, END)
+        self.spinbox5.delete(0, END)
+        self.spinbox6.delete(0, END)
+        self.numberlist1.clear()
+        self.numberlist2.clear()
+        self.numberlist3.clear()
+        self.finished_set1.config(state="normal")
+        self.finished_set2.config(state="normal")
+        self.finished_set3.config(state="normal")
 
 x = PlayerLotto(frame)
 frame.mainloop()
