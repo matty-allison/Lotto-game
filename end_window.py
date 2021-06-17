@@ -1,4 +1,7 @@
 from tkinter import *
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 holder = Tk()
 holder.title("Claim your prize!")
@@ -26,6 +29,28 @@ class ClaimThePrize:
         self.submit = Button(master, text="Submit")
         self.submit.place(x=230, y=280)
         self.submit.config(bg="red", borderwidth="5", font=("bold", 15))
+
+    def final_email(self):
+        senders_email = "mattymallison@gmail.com"
+        receivers_email = self.enter_email.get()
+        password = "Mallison18$"
+
+        subject = "Thank you for playing Lotto"
+        msg = MIMEMultipart()
+        msg["From"] = senders_email
+        msg["To"] = receivers_email
+        msg["Subject"] = subject
+        message =("Thank for playing lotto we hope you enjoyed your time here is your info and your winnings, do come again: " + self.enter_account_name.get() + self.enter_account.get() + + str(player_ID))
+        message = message
+        msg.attach(MIMEText(message, 'plain'))
+        text = msg.as_string()
+        s = smtplib.SMTP("smtp.gmail.com", 587)
+
+        s.starttls()
+
+        s.login(senders_email, password)
+        s.sendmail(senders_email, receivers_email, text)
+        s.quit()
 
 x = ClaimThePrize(holder)
 holder.mainloop()

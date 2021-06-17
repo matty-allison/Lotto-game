@@ -64,7 +64,7 @@ class SignUp:
                     msg["To"] = receivers_email
                     msg["Subject"] = subject
 
-                    message = str(player_ID)
+                    message = ("this is your unique player ID: " + str(player_ID))
                     message = message
                     msg.attach(MIMEText(message, 'plain'))
                     text = msg.as_string()

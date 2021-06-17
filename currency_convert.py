@@ -9,6 +9,11 @@ space.config(bg="yellow")
 
 response = requests.get("https://v6.exchangerate-api.com/v6/a24d5559a57a8ed22b9fd2a0/latest/USD")
 data = response.json()
+conversion_rates = data['conversion_rates']
+
+list1 = []
+for i in conversion_rates.keys():
+    list1.append(i)
 class Currency_converter:
     def __init__(self, master):
         self.amount = Label(master, text="R10, 000, 000.00")
@@ -20,7 +25,7 @@ class Currency_converter:
         self.converted = Label(master, text="$727, 047.50")
         self.converted.place(x=280, y=70)
         self.converted.config(bg="yellow", font=("bold", 15))
-        self.countries = ttk.Combobox(master)
+        self.countries = ttk.Combobox(master, values=list1)
         self.countries.place(x=150, y=20)
         self.convert_button = Button(master, text="Convert")
         self.convert_button.place(x=140, y=120)
