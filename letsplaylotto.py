@@ -19,7 +19,6 @@ class PlayerLotto:
     list1 = StringVar()
     list2 = StringVar()
     list3 = StringVar()
-    list4 = IntVar()
     def __init__(self,master):
         self.spinbox1 = Spinbox(master, width=5, from_=1, to=49)
         self.spinbox1.place(x=70, y=200)
@@ -66,9 +65,8 @@ class PlayerLotto:
         self.start_lotto = Button(master, text="START LOTTO!!", command=self.winnings)
         self.start_lotto.place(x=220, y=500)
         self.start_lotto.config(bg="red", borderwidth="10")
-        self.amount = Label(master, textvariable=self.list4)
-        self.amount.place(x=350, y=400)
-        self.numberlist4 = []
+        self.amount = Label(master)
+        self.amount.place(x=380, y=400)
         self.amount.config(bg="yellow", font=("bold", 15))
         self.currency = Button(master, text="Convert?")
         self.currency.place(x=350, y=450)
@@ -80,28 +78,37 @@ class PlayerLotto:
         self.claimprize.place(x=385, y=500)
         self.claimprize.config(bg="red", borderwidth="5")
         self.winningset = Label(master)
-        self.winningset.place(x=350, y=350)
+        self.winningset.place(x=380, y=350)
         self.winningset.config(bg='yellow', font=("bold", 15), fg="red")
+        self.equal = Label(master)
+        self.equal.place(x=210, y=350)
+        self.equal.config(bg="yellow")
 
     def winnings(self):
-        y = 0
         winning_set = random.sample(range(1, 49), 6)
         self.winningset.config(text=winning_set)
-        for i in range(0, 6):
-            if self.list1 in winning_set:
-                y += 1
-            if y == 6:
-                self.list4 = 100000
-            elif y == 5:
-                self.list4 = 8584
-            elif y == 4:
-                self.list4 = 2384
-            elif y == 3:
-                self.list4 = 100.00
-            elif y == 2:
-                self.list4 = 20
-            elif y < 2:
-                self.list4 = 0
+        Winningset = set(winning_set)
+        choices_set = set(self.numberlist1)
+        prizes = [0, 20, 100.50, 2384, 8584, 10000000]
+
+        compare = Winningset.intersection(choices_set)
+        print (compare)
+        final_amount = len(compare)
+        self.equal.config(text="Matches: " + str(final_amount))
+        if final_amount == 0:
+            self.amount.config(text=prizes[0])
+        elif final_amount == 1:
+            self.amount.config(text=prizes[0])
+        elif final_amount == 2:
+            self.amount.config(text=prizes[1])
+        elif final_amount == 3:
+            self.amount.config(text=prizes[2])
+        elif final_amount == 4:
+            self.amount.config(text=prizes[3])
+        elif final_amount == 5:
+            self.amount.config(text=prizes[4])
+        elif final_amount == 6:
+            self.amount.config(text=prizes[5])
 
     def set_1(self):
         the_set = self.spinbox1.get() + self.spinbox2.get() + self.spinbox3.get() + self.spinbox4.get() + self.spinbox5.get() + self.spinbox6.get()
@@ -118,56 +125,77 @@ class PlayerLotto:
                 self.numberlist1.append(int(self.spinbox1.get()))
             elif int(self.spinbox1.get()) > 49:
                 messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+                return self.numberlist1.clear()
             if int(self.spinbox2.get()) <= 49:
                 self.numberlist1.append(int(self.spinbox2.get()))
             elif int(self.spinbox2.get()) > 49:
                 messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+                return self.numberlist1.clear()
             if int(self.spinbox3.get()) <= 49:
                 self.numberlist1.append(int(self.spinbox3.get()))
             elif int(self.spinbox3.get()) > 49:
                 messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+                return self.numberlist1.clear()
             if int(self.spinbox4.get()) <= 49:
                 self.numberlist1.append(int(self.spinbox4.get()))
             elif int(self.spinbox4.get()) > 49:
                 messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+                return self.numberlist1.clear()
             if int(self.spinbox5.get()) <= 49:
                 self.numberlist1.append(int(self.spinbox5.get()))
             elif int(self.spinbox5.get()) > 49:
                 messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+                return self.numberlist1.clear()
             if int(self.spinbox6.get()) <= 49:
                 self.numberlist1.append(int(self.spinbox6.get()))
             elif int(self.spinbox6.get()) > 49:
                 messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+                return self.numberlist1.clear()
             if self.spinbox1.get() == self.spinbox2.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist1.clear()
             if self.spinbox1.get() == self.spinbox3.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist1.clear()
             if self.spinbox1.get() == self.spinbox4.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist1.clear()
             if self.spinbox1.get() == self.spinbox5.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist1.clear()
             if self.spinbox1.get() == self.spinbox6.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist1.clear()
             if self.spinbox2.get() == self.spinbox3.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist1.clear()
             if self.spinbox2.get() == self.spinbox4.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist1.clear()
             if self.spinbox2.get() == self.spinbox5.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist1.clear()
             if self.spinbox2.get() == self.spinbox6.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist1.clear()
             if self.spinbox3.get() == self.spinbox4.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist1.clear()
             if self.spinbox3.get() == self.spinbox5.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist1.clear()
             if self.spinbox3.get() == self.spinbox6.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist1.clear()
             if self.spinbox4.get() == self.spinbox5.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist1.clear()
             if self.spinbox4.get() == self.spinbox6.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist1.clear()
             if self.spinbox5.get() == self.spinbox6.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist1.clear()
 
             self.list1.set(self.numberlist1)
         except ValueError:
@@ -182,56 +210,77 @@ class PlayerLotto:
                 self.numberlist2.append(int(self.spinbox1.get()))
             elif int(self.spinbox1.get()) > 49:
                 messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+                return self.numberlist2.clear()
             if int(self.spinbox2.get()) <= 49:
                 self.numberlist2.append(int(self.spinbox2.get()))
             elif int(self.spinbox2.get()) > 49:
                 messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+                return self.numberlist2.clear()
             if int(self.spinbox3.get()) <= 49:
                 self.numberlist2.append(int(self.spinbox3.get()))
             elif int(self.spinbox3.get()) > 49:
                 messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+                return self.numberlist2.clear()
             if int(self.spinbox4.get()) <= 49:
                 self.numberlist2.append(int(self.spinbox4.get()))
             elif int(self.spinbox4.get()) > 49:
                 messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+                return self.numberlist2.clear()
             if int(self.spinbox5.get()) <= 49:
                 self.numberlist2.append(int(self.spinbox5.get()))
             elif int(self.spinbox5.get()) > 49:
                 messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+                return self.numberlist2.clear()
             if int(self.spinbox6.get()) <= 49:
                 self.numberlist2.append(int(self.spinbox6.get()))
             elif int(self.spinbox6.get()) > 49:
                 messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+                return self.numberlist2.clear()
             if self.spinbox1.get() == self.spinbox2.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist2.clear()
             if self.spinbox1.get() == self.spinbox3.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist2.clear()
             if self.spinbox1.get() == self.spinbox4.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist2.clear()
             if self.spinbox1.get() == self.spinbox5.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist2.clear()
             if self.spinbox1.get() == self.spinbox6.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist2.clear()
             if self.spinbox2.get() == self.spinbox3.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist2.clear()
             if self.spinbox2.get() == self.spinbox4.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist2.clear()
             if self.spinbox2.get() == self.spinbox5.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist2.clear()
             if self.spinbox2.get() == self.spinbox6.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist2.clear()
             if self.spinbox3.get() == self.spinbox4.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist2.clear()
             if self.spinbox3.get() == self.spinbox5.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist2.clear()
             if self.spinbox3.get() == self.spinbox6.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist2.clear()
             if self.spinbox4.get() == self.spinbox5.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist2.clear()
             if self.spinbox4.get() == self.spinbox6.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist2.clear()
             if self.spinbox5.get() == self.spinbox6.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist2.clear()
 
             self.list2.set(self.numberlist2)
         except ValueError:
@@ -246,56 +295,77 @@ class PlayerLotto:
                 self.numberlist3.append(int(self.spinbox1.get()))
             elif int(self.spinbox1.get()) > 49:
                 messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+                return self.numberlist3.clear()
             if int(self.spinbox2.get()) <= 49:
                 self.numberlist3.append(int(self.spinbox2.get()))
             elif int(self.spinbox2.get()) > 49:
                 messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+                return self.numberlist3.clear()
             if int(self.spinbox3.get()) <= 49:
                 self.numberlist3.append(int(self.spinbox3.get()))
             elif int(self.spinbox3.get()) > 49:
                 messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+                return self.numberlist3.clear()
             if int(self.spinbox4.get()) <= 49:
                 self.numberlist3.append(int(self.spinbox4.get()))
             elif int(self.spinbox4.get()) > 49:
                 messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+                return self.numberlist3.clear()
             if int(self.spinbox5.get()) <= 49:
                 self.numberlist3.append(int(self.spinbox5.get()))
             elif int(self.spinbox5.get()) > 49:
                 messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+                return self.numberlist3.clear()
             if int(self.spinbox6.get()) <= 49:
                 self.numberlist3.append(int(self.spinbox6.get()))
             elif int(self.spinbox6.get()) > 49:
                 messagebox.showerror('STATUS', "Invalid, numbers must be between 0 and 50")
+                return self.numberlist3.clear()
             if self.spinbox1.get() == self.spinbox2.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist3.clear()
             if self.spinbox1.get() == self.spinbox3.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist3.clear()
             if self.spinbox1.get() == self.spinbox4.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist3.clear()
             if self.spinbox1.get() == self.spinbox5.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist3.clear()
             if self.spinbox1.get() == self.spinbox6.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist3.clear()
             if self.spinbox2.get() == self.spinbox3.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist3.clear()
             if self.spinbox2.get() == self.spinbox4.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist3.clear()
             if self.spinbox2.get() == self.spinbox5.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist3.clear()
             if self.spinbox2.get() == self.spinbox6.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist3.clear()
             if self.spinbox3.get() == self.spinbox4.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist3.clear()
             if self.spinbox3.get() == self.spinbox5.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist3.clear()
             if self.spinbox3.get() == self.spinbox6.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist3.clear()
             if self.spinbox4.get() == self.spinbox5.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist3.clear()
             if self.spinbox4.get() == self.spinbox6.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist3.clear()
             if self.spinbox5.get() == self.spinbox6.get():
                 messagebox.showerror('STATUS', "Invalid, You can not have more than 1 of a number.")
+                return self.numberlist3.clear()
 
             self.list3.set(self.numberlist3)
         except ValueError:
@@ -321,6 +391,7 @@ class PlayerLotto:
         self.finished_set3.config(state="normal")
         self.winningset.config(text="")
         self.amount.config(text="")
+        self.equal.config(text="")
 
 x = PlayerLotto(frame)
 frame.mainloop()

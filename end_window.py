@@ -1,3 +1,4 @@
+#Matthew Allison Class 2
 from tkinter import *
 import smtplib
 from email.mime.text import MIMEText
