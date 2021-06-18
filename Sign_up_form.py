@@ -7,6 +7,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from tkinter import messagebox
+from playsound import playsound
 
 
 root = Tk()
@@ -50,14 +51,22 @@ class SignUp:
 
     def signin_button(self):
         email_invalid = "^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$"
+        player_ID = self.enter_name.get().strip() + self.enter_idnumber.get()[:2]
         player_info = open('textfile.txt', 'a')
+        player_info.write("Username: " + self.enter_name.get())
+        player_info.write('\n')
+        player_info.write("Email: " + self.enter_email.get())
+        player_info.write('\n')
+        player_info.write("Id Number: " + self.enter_idnumber.get())
+        player_info.write('\n')
+        player_info.write("Player ID: " + player_ID)
+        player_info.write('\n')
         senders_email = "mattymallison@gmail.com"
         receivers_email = self.enter_email.get()
         password = "Mallison18$"
         try:
             for i in range(len(self.enter_email.get())):
                 if re.search(email_invalid, self.enter_email.get()):
-                    player_ID = self.enter_name.get().strip() + self.enter_idnumber.get()[:2]
                     subject = "Hello Player"
                     msg = MIMEMultipart()
                     msg["From"] = senders_email
@@ -75,15 +84,6 @@ class SignUp:
                     s.login(senders_email, password)
                     s.sendmail(senders_email, receivers_email, text)
                     s.quit()
-
-                    player_info.write("Username: " + self.enter_name.get())
-                    player_info.write('\n')
-                    player_info.write("Email: " + self.enter_email.get())
-                    player_info.write('\n')
-                    player_info.write("Id Number: " + self.enter_idnumber.get())
-                    player_info.write('\n')
-                    player_info.write("Player ID: " + player_ID)
-                    player_info.write('\n')
                 else:
                     messagebox.showerror('STATUS', "Invalid email")
                     break
@@ -97,13 +97,15 @@ class SignUp:
                     messagebox.showerror('STATUS', "No enter")
                 elif age >= 18:
                     messagebox.showinfo('STATUS', "Let's play")
+                    player_info.close()
+                    playsound("Welcome - Male Voice Speaks (mp3cut.net).mp3")
                     root.destroy()
                     import letsplaylotto
+
         except ValueError:
             if self.enter_idnumber.get() != int:
                 messagebox.showerror('STATUS', "invalid")
-        finally:
-            player_info.close()
+
 
     def log_button(self):
         root.destroy()

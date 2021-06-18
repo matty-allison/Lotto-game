@@ -3,28 +3,4 @@ Email: mattymallison@gmail.com
 Id Number: 0207245423083
 Player ID: Matthew02
 Age:18
-Username: Gary
-Email: gafrica851@gmail.com
-Id Number: 0003065104089
-Player ID: Gary00
-Age:21
-Username: Aaliyah Jardien
-Email: aaliyahjar13@gmail.com
-Id Number: 0203131075087
-Player ID: Aaliyah Jardien02
-Age:19
-Username: uthmaan
-Email: uthmaanbreda@gmail.com
-Id Number: 9609095470083
-Player ID: uthmaan96
-Age:24
-Username: Thabo
-Email: thabosetsubi3@gmail.com
-Id Number: 9903156253086
-Player ID: Thabo99
-Age:22
-Username: ghiyaath
-Email: ghiyaathwilliams@gmail.com
-Id Number: 0012235091084
-Player ID: ghiyaath00
-Age:20
+winnings: R20

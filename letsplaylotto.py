@@ -64,52 +64,103 @@ class PlayerLotto:
         self.finished_set3.config(bg="orange", borderwidth="5")
         self.start_lotto = Button(master, text="START LOTTO!!", command=self.winnings)
         self.start_lotto.place(x=220, y=500)
-        self.start_lotto.config(bg="red", borderwidth="10")
+        self.start_lotto.config(bg="red", borderwidth="10", state="disabled")
         self.amount = Label(master)
         self.amount.place(x=380, y=400)
         self.amount.config(bg="yellow", font=("bold", 15))
         self.currency = Button(master, text="Convert?")
         self.currency.place(x=350, y=450)
-        self.currency.config(bg="orange", borderwidth="5")
+        self.currency.config(bg="orange", borderwidth="5", state="disabled")
         self.playagain = Button(master, text="Play again?!", command=self.clr)
         self.playagain.place(x=80, y=500)
         self.playagain.config(bg="orange", borderwidth="5")
         self.claimprize = Button(master, text="Claim prize!!")
         self.claimprize.place(x=385, y=500)
-        self.claimprize.config(bg="red", borderwidth="5")
+        self.claimprize.config(bg="red", borderwidth="5", state="disabled")
         self.winningset = Label(master)
         self.winningset.place(x=380, y=350)
         self.winningset.config(bg='yellow', font=("bold", 15), fg="red")
         self.equal = Label(master)
         self.equal.place(x=210, y=350)
         self.equal.config(bg="yellow")
+        self.equal2 = Label(master)
+        self.equal2.place(x=210, y=400)
+        self.equal2.config(bg="yellow")
+        self.equal3 = Label(master)
+        self.equal3.place(x=210, y=450)
+        self.equal3.config(bg="yellow")
 
     def winnings(self):
         winning_set = random.sample(range(1, 49), 6)
         self.winningset.config(text=winning_set)
         Winningset = set(winning_set)
         choices_set = set(self.numberlist1)
+        choices_set1 = set(self.numberlist2)
+        choices_set2 = set(self.numberlist3)
         prizes = [0, 20, 100.50, 2384, 8584, 10000000]
-
         compare = Winningset.intersection(choices_set)
-        print (compare)
+        compare2 = Winningset.intersection(choices_set1)
+        compare3 = Winningset.intersection(choices_set2)
         final_amount = len(compare)
+        final_amount1 = len(compare2)
+        final_amount2 = len(compare3)
         self.equal.config(text="Matches: " + str(final_amount))
+        self.equal2.config(text="Matches: " + str(final_amount1))
+        self.equal3.config(text="Matches: " + str(final_amount2))
         if final_amount == 0:
-            self.amount.config(text=prizes[0])
+            final_prize = prizes[0]
         elif final_amount == 1:
-            self.amount.config(text=prizes[0])
+            final_prize = prizes[0]
         elif final_amount == 2:
-            self.amount.config(text=prizes[1])
+            final_prize = prizes[1]
         elif final_amount == 3:
-            self.amount.config(text=prizes[2])
+            final_prize = prizes[2]
         elif final_amount == 4:
-            self.amount.config(text=prizes[3])
+            final_prize = prizes[3]
         elif final_amount == 5:
-            self.amount.config(text=prizes[4])
+            final_prize = prizes[4]
         elif final_amount == 6:
-            self.amount.config(text=prizes[5])
+            final_prize = prizes[5]
 
+        if final_amount1 == 0:
+            final_prize1 = prizes[0]
+        elif final_amount1 == 1:
+            final_prize1 = prizes[0]
+        elif final_amount1 == 2:
+            final_prize1 = prizes[1]
+        elif final_amount1 == 3:
+            final_prize1 = prizes[2]
+        elif final_amount1 == 4:
+            final_prize1 = prizes[3]
+        elif final_amount1 == 5:
+            final_prize1 = prizes[4]
+        elif final_amount1 == 6:
+            final_prize1 = prizes[5]
+
+        if final_amount2 == 0:
+            final_prize2 = prizes[0]
+        elif final_amount2 == 1:
+            final_prize2 = prizes[0]
+        elif final_amount2 == 2:
+            final_prize2 = prizes[1]
+        elif final_amount2 == 3:
+            final_prize2 = prizes[2]
+        elif final_amount2 == 4:
+            final_prize2 = prizes[3]
+        elif final_amount2 == 5:
+            final_prize2 = prizes[4]
+        elif final_amount2 == 6:
+            final_prize2 = prizes[5]
+
+        big_prize = final_prize + final_prize1 + final_prize2
+
+        self.amount.config(text=big_prize)
+        lotto_prize = open('textfile.txt', 'a')
+        lotto_prize.write("winnings: " + "R" +str(big_prize))
+        lotto_prize.write("\n")
+        self.start_lotto.config(state="disabled")
+        self.currency.config(state="normal")
+        self.claimprize.config(state="normal")
     def set_1(self):
         the_set = self.spinbox1.get() + self.spinbox2.get() + self.spinbox3.get() + self.spinbox4.get() + self.spinbox5.get() + self.spinbox6.get()
         try:
@@ -202,6 +253,7 @@ class PlayerLotto:
             if the_set != int:
                 messagebox.showerror('STATUS', "Invalid")
         self.finished_set1.config(state="disabled")
+        self.start_lotto.config(state="normal")
 
     def set_2(self):
         the_set = self.spinbox1.get() + self.spinbox2.get() + self.spinbox3.get() + self.spinbox4.get() + self.spinbox5.get() + self.spinbox6.get()
@@ -287,6 +339,7 @@ class PlayerLotto:
             if the_set != int:
                 messagebox.showerror('STATUS', "Invalid")
         self.finished_set2.config(state="disabled")
+        self.start_lotto.config(state="normal")
 
     def set_3(self):
         the_set = self.spinbox1.get() + self.spinbox2.get() + self.spinbox3.get() + self.spinbox4.get() + self.spinbox5.get() + self.spinbox6.get()
@@ -372,6 +425,7 @@ class PlayerLotto:
             if the_set != int:
                 messagebox.showerror('STATUS', "Invalid")
         self.finished_set3.config(state="disabled")
+        self.start_lotto.config(state="normal")
 
     def clr(self):
         self.spinbox1.delete(0, END)
@@ -392,6 +446,13 @@ class PlayerLotto:
         self.winningset.config(text="")
         self.amount.config(text="")
         self.equal.config(text="")
+        self.start_lotto.config(state="disabled")
+        self.currency.config(state="normal")
+        self.claimprize.config(state="normal")
+
+    def switch_to_converter(self):
+        frame.destroy()
+        import currency_convert
 
 x = PlayerLotto(frame)
 frame.mainloop()
