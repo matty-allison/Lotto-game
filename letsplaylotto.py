@@ -2,6 +2,7 @@
 from tkinter import *
 from tkinter import messagebox
 import random
+from playsound import playsound
 
 frame = Tk()
 frame.title("Lotto")
@@ -68,13 +69,13 @@ class PlayerLotto:
         self.amount = Label(master)
         self.amount.place(x=380, y=400)
         self.amount.config(bg="yellow", font=("bold", 15))
-        self.currency = Button(master, text="Convert?")
+        self.currency = Button(master, text="Convert?", command=self.switch_to_converter)
         self.currency.place(x=350, y=450)
         self.currency.config(bg="orange", borderwidth="5", state="disabled")
         self.playagain = Button(master, text="Play again?!", command=self.clr)
         self.playagain.place(x=80, y=500)
         self.playagain.config(bg="orange", borderwidth="5")
-        self.claimprize = Button(master, text="Claim prize!!")
+        self.claimprize = Button(master, text="Claim prize!!", command=self.switch_to_claim)
         self.claimprize.place(x=385, y=500)
         self.claimprize.config(bg="red", borderwidth="5", state="disabled")
         self.winningset = Label(master)
@@ -155,12 +156,19 @@ class PlayerLotto:
         big_prize = final_prize + final_prize1 + final_prize2
 
         self.amount.config(text=big_prize)
-        lotto_prize = open('textfile.txt', 'a')
-        lotto_prize.write("winnings: " + "R" +str(big_prize))
-        lotto_prize.write("\n")
-        self.start_lotto.config(state="disabled")
-        self.currency.config(state="normal")
-        self.claimprize.config(state="normal")
+        if big_prize == 0:
+            self.currency.config(state="disabled")
+            self.claimprize.config(state="disabled")
+            playsound("Sad Trombone - Gaming Sound Effect (HD) (mp3cut.net).mp3")
+        elif big_prize != 0:
+            playsound("You win sound effect 5.mp3")
+            self.currency.config(state="normal")
+            self.claimprize.config(state="normal")
+            lotto_prize = open('textfile.txt', 'a')
+            lotto_prize.write("winnings: " + "R" +str(big_prize))
+            lotto_prize.write("\n")
+            self.start_lotto.config(state="disabled")
+
     def set_1(self):
         the_set = self.spinbox1.get() + self.spinbox2.get() + self.spinbox3.get() + self.spinbox4.get() + self.spinbox5.get() + self.spinbox6.get()
         try:
@@ -446,6 +454,8 @@ class PlayerLotto:
         self.winningset.config(text="")
         self.amount.config(text="")
         self.equal.config(text="")
+        self.equal2.config(text="")
+        self.equal3.config(text="")
         self.start_lotto.config(state="disabled")
         self.currency.config(state="normal")
         self.claimprize.config(state="normal")
@@ -453,6 +463,10 @@ class PlayerLotto:
     def switch_to_converter(self):
         frame.destroy()
         import currency_convert
+
+    def switch_to_claim(self):
+        frame.destroy()
+        import end_window
 
 x = PlayerLotto(frame)
 frame.mainloop()
