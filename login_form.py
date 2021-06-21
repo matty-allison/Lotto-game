@@ -28,6 +28,7 @@ class LogIn:
         self.back.config(bg="orange", borderwidth="5")
 
     def welcomeback(self):
+        player_id = 0
         with open('textfile.txt', 'r') as c:
                 for l in c:
                     if "Player ID" and self.enter_name.get() in l:

@@ -74,7 +74,7 @@ class PlayerLotto:
         self.currency.config(bg="orange", borderwidth="5", state="disabled")
         self.playagain = Button(master, text="Play again?!", command=self.clr)
         self.playagain.place(x=80, y=500)
-        self.playagain.config(bg="orange", borderwidth="5")
+        self.playagain.config(bg="orange", borderwidth="5", state="disabled")
         self.claimprize = Button(master, text="Claim prize!!", command=self.switch_to_claim)
         self.claimprize.place(x=385, y=500)
         self.claimprize.config(bg="red", borderwidth="5", state="disabled")
@@ -168,6 +168,8 @@ class PlayerLotto:
             lotto_prize.write("winnings: " + "R" +str(big_prize))
             lotto_prize.write("\n")
             self.start_lotto.config(state="disabled")
+            self.currency.config(state="normal")
+            self.claimprize.config(state="normal")
 
     def set_1(self):
         the_set = self.spinbox1.get() + self.spinbox2.get() + self.spinbox3.get() + self.spinbox4.get() + self.spinbox5.get() + self.spinbox6.get()
@@ -254,6 +256,7 @@ class PlayerLotto:
                 messagebox.showerror('STATUS', "Invalid")
         self.finished_set1.config(state="disabled")
         self.start_lotto.config(state="normal")
+        self.playagain.config(state="normal")
 
     def set_2(self):
         the_set = self.spinbox1.get() + self.spinbox2.get() + self.spinbox3.get() + self.spinbox4.get() + self.spinbox5.get() + self.spinbox6.get()
@@ -340,6 +343,7 @@ class PlayerLotto:
                 messagebox.showerror('STATUS', "Invalid")
         self.finished_set2.config(state="disabled")
         self.start_lotto.config(state="normal")
+        self.playagain.config(state="normal")
 
     def set_3(self):
         the_set = self.spinbox1.get() + self.spinbox2.get() + self.spinbox3.get() + self.spinbox4.get() + self.spinbox5.get() + self.spinbox6.get()
@@ -426,6 +430,7 @@ class PlayerLotto:
                 messagebox.showerror('STATUS', "Invalid")
         self.finished_set3.config(state="disabled")
         self.start_lotto.config(state="normal")
+        self.playagain.config(state="normal")
 
     def clr(self):
         self.spinbox1.delete(0, END)
@@ -449,8 +454,8 @@ class PlayerLotto:
         self.equal2.config(text="")
         self.equal3.config(text="")
         self.start_lotto.config(state="disabled")
-        self.currency.config(state="normal")
-        self.claimprize.config(state="normal")
+        self.currency.config(state="disabled")
+        self.claimprize.config(state="disabled")
 
     def switch_to_converter(self):
         frame.destroy()
