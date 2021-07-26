@@ -61,9 +61,9 @@ class SignUp:
         player_info.write('\n')
         player_info.write("Player ID: " + player_ID)
         player_info.write('\n')
-        senders_email = "mattymallison@gmail.com"
+        senders_email = "matthewatwork18@gmail.com"
         receivers_email = self.enter_email.get()
-        password = "Mallison18$"
+        password = "Mallison17$"
         try:
             for i in range(len(self.enter_email.get())):
                 if re.search(email_invalid, self.enter_email.get()):
