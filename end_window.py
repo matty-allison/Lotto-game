@@ -52,7 +52,7 @@ class ClaimThePrize:
                         prize = str(l[10:-1])
             senders_email = "mattymallison@gmail.com"
             receivers_email = email
-            password = "Mallison18$"
+            password = ""
 
             subject = "Thank you for playing Lotto"
             msg = MIMEMultipart()
